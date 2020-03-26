@@ -134,6 +134,8 @@ app.post('/api/posts',verifyToken,(req,res)=>{
   })
 
 })
+
+// In this data is coming from database and after the pdf is generated
 app.get('/api/pdf',(req,res,err)=>{
   let query_fire=`SELECT * from register`;
   console.log(req.query)
@@ -212,7 +214,7 @@ doc
 
 // });
 
-
+// This is the static api to generate PDF
 
 app.get('/createpdf',  (req,res)=>{
   const doc = new pdfDocument();
@@ -221,7 +223,7 @@ doc.pipe(fs.createWriteStream('satish.pdf'));
 
 doc
   .fontSize(25)
-  .text(expression(), 100, 100);
+  .text("Vivek Jha", 100, 100);
 
 
   doc.image('image.jpeg', {
