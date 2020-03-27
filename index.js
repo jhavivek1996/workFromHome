@@ -58,8 +58,8 @@ app.post('/register',(req,res,err)=>{
                 let transporter = nodemailer.createTransport({
                   service:'gmail',
                   auth:{
-                      user:"example@gmail.com",
-                      pass:"password123"
+                      user:"jhaviveksud@gmail.com",
+                      pass:"Rockstar@Vivek"
             
                   }
               });
@@ -67,8 +67,8 @@ app.post('/register',(req,res,err)=>{
               let mailOptions = {
                   from:'jhaviveksud@gmail.com',
                   to:data.email,
-                  subject : `Hi ${data.name} this is Node js mailing service`,
-                  text : `Hii Name : ${data.name}, Designation: ${data.designation} email: ${data.email}, phone: ${data.phone}, username: ${data.username}`
+                  subject : `Hi ${data.name}. Welcome to the world of Er. Sahyar`,
+                  text : `Name : ${data.name},\n Designation: ${data.designation} \n email: ${data.email}, \n phone: ${data.phone}, \n username: ${data.username} \n. Thankyour for registerting with Er, Shayar`
               }
             
               let transp = transporter.sendMail(mailOptions,(err,data)=>{
@@ -81,14 +81,7 @@ app.post('/register',(req,res,err)=>{
               })
              
            } 
-
-           
-
-                //
-
-
-
-                res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+           res.send(JSON.stringify({"status": 200, "error": null, "response": results, "Email":"Please Check the mail for confimation "}));
 
             }
             
