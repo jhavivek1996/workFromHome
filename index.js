@@ -10,6 +10,7 @@ const pdfDocument = require('pdfkit');
 
 
 
+
 app.use(fileUpload({
     useTempFiles : true,
     tempFileDir : '/tmp/'
@@ -52,9 +53,52 @@ app.post('/register',(req,res,err)=>{
     let query = con.query(sql,data,(err, results) => 
             {
             if(err) throw err;
-             res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+            else{
+                //
+                let transporter = nodemailer.createTransport({
+                  service:'gmail',
+                  auth:{
+                      user:"example@gmail.com",
+                      pass:"password123"
+            
+                  }
+              });
+             
+              let mailOptions = {
+                  from:'jhaviveksud@gmail.com',
+                  to:data.email,
+                  subject : `Hi ${data.name} this is Node js mailing service`,
+                  text : `Hii Name : ${data.name}, Designation: ${data.designation} email: ${data.email}, phone: ${data.phone}, username: ${data.username}`
+              }
+            
+              let transp = transporter.sendMail(mailOptions,(err,data)=>{
+                if(err){
+                  console.log("Error"+err);
 
-          });
+                }else{
+                  console.log("Mail Sent")
+                }
+              })
+             
+           } 
+
+           
+
+                //
+
+
+
+                res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
+
+            }
+            
+
+             
+          );
+          
+          
+         
+       
 });
 
 
